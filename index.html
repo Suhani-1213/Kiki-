@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday Kikii ❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #a71924;
+    font-family: Georgia, serif;
+    overflow: hidden;
+}
+
+.page {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}
+
+/* FIRST PAGE */
+
+#page1 {
+    background: #a71924;
+    transition: opacity 1s ease;
+}
+
+.envelope {
+    width: 260px;
+    height: 180px;
+    background: #f8e6d0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 10px 30px #4b0710;
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    border-top: 100px solid #e8c5a8;
+    border-left: 130px solid transparent;
+    border-right: 130px solid transparent;
+}
+
+.envelope-text {
+    color: #8d1724;
+    font-size: 22px;
+    font-weight: bold;
+    z-index: 2;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.click-text {
+    color: white;
+    margin-top: 35px;
+    font-size: 16px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0.3; }
+}
+
+/* SECOND PAGE */
+
+#page2 {
+    display: none;
+    background: #a71924;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    gap: 20px;
+}
+
+#page2.show {
+    display: flex;
+}
+
+.birthday-title {
+    opacity: 0;
+    transform: scale(0.5);
+    animation: reveal 1.5s ease forwards;
+}
+
+.birthday-title:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.birthday-title:nth-child(3) {
+    animation-delay: 2s;
+}
+
+@keyframes reveal {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- FIRST PAGE -->
+
+<div class="page" id="page1">
+
+    <div class="envelope" onclick="openPage()">
+
+        <div class="envelope-text">
+            Happy<br>Birthday ❤️
+        </div>
+
+    </div>
+
+    <p class="click-text">click me! ♡</p>
+
+</div>
+
+
+<!-- SECOND PAGE -->
+
+<div class="page" id="page2">
+
+    <h1 class="birthday-title">
+        Happy Birthday
+    </h1>
+
+    <h1 class="birthday-title">
+        My Love ❤️
+    </h1>
+
+    <h1 class="birthday-title">
+        KIKII 🥹
+    </h1>
+
+    <p class="birthday-title">
+        Made with lots of love, just for you!
+    </p>
+
+</div>
+
+
+<script>
+
+function openPage() {
+
+    const first = document.getElementById("page1");
+    const second = document.getElementById("page2");
+
+    first.style.opacity = "0";
+
+    setTimeout(() => {
+
+        first.style.display = "none";
+
+        second.classList.add("show");
+
+    }, 1000);
+
+}
+
+</script>
+
+</body>
+</html>
