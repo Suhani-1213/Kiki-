@@ -1,183 +1,849 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Happy Birthday Kikii ❤️</title>
-
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background: #a71924;
-    font-family: Georgia, serif;
-    overflow: hidden;
-}
-
-.page {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    position: relative;
-}
-
-/* FIRST PAGE */
-
-#page1 {
-    background: #a71924;
-    transition: opacity 1s ease;
-}
-
-.envelope {
-    width: 260px;
-    height: 180px;
-    background: #f8e6d0;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 10px 30px #4b0710;
-}
-
-.envelope::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    border-top: 100px solid #e8c5a8;
-    border-left: 130px solid transparent;
-    border-right: 130px solid transparent;
-}
-
-.envelope-text {
-    color: #8d1724;
-    font-size: 22px;
-    font-weight: bold;
-    z-index: 2;
-    text-align: center;
-    line-height: 1.5;
-}
-
-.click-text {
-    color: white;
-    margin-top: 35px;
-    font-size: 16px;
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    50% { opacity: 0.3; }
-}
-
-/* SECOND PAGE */
-
-#page2 {
-    display: none;
-    background: #a71924;
-    color: white;
-    text-align: center;
-    padding: 25px;
-    gap: 20px;
-}
-
-#page2.show {
-    display: flex;
-}
-
-.birthday-title {
-    opacity: 0;
-    transform: scale(0.5);
-    animation: reveal 1.5s ease forwards;
-}
-
-.birthday-title:nth-child(2) {
-    animation-delay: 1s;
-}
-
-.birthday-title:nth-child(3) {
-    animation-delay: 2s;
-}
-
-@keyframes reveal {
-    to {
-        opacity: 1;
-        transform: scale(1);
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday — Little Love Note</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Indie+Flower&family=La+Belle+Aurore&family=Patrick+Hand&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --maroon: #732626;
+      --cream: #F7F4EC;
+      --ink: #2C2222;
     }
-}
-</style>
-</head>
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--maroon);
+      color: var(--cream);
+      font-family: 'Patrick Hand', cursive;
+      overflow-x: hidden;
+    }
+
+    /* =========================================
+       AESTHETIC FLOATING BOWS IN BACKGROUND
+       ========================================= */
+    .bg-bows {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .bg-bow {
+      position: absolute;
+      font-size: clamp(1.3rem, 2.4vw, 2rem);
+      opacity: 0.22;
+      animation: bowFloat 7s ease-in-out infinite;
+    }
+
+    .bg-bow.b1 { top: 8%; left: 6%; animation-delay: 0s; --r: -14deg; }
+    .bg-bow.b2 { top: 16%; right: 8%; animation-delay: 1.5s; --r: 16deg; }
+    .bg-bow.b3 { top: 45%; left: 4%; animation-delay: 3s; --r: 10deg; }
+    .bg-bow.b4 { top: 58%; right: 5%; animation-delay: 2.2s; --r: -18deg; }
+    .bg-bow.b5 { bottom: 12%; left: 9%; animation-delay: 4s; --r: 12deg; }
+    .bg-bow.b6 { bottom: 10%; right: 11%; animation-delay: 0.8s; --r: -12deg; }
+
+    @keyframes bowFloat {
+      0%, 100% {
+        transform: translateY(0px) rotate(var(--r, 0deg));
+      }
+      50% {
+        transform: translateY(-11px) rotate(calc(var(--r, 0deg) + 6deg));
+      }
+    }
+
+    .section {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 55px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* =========================================
+       GENTLE ANIMATION FOR REMAINING WEBSITE
+       ========================================= */
+    .soft-reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .soft-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================================
+       SECTION 1: HERO IMAGE + CODE CLICK ME!
+       ========================================= */
+    .hero-section {
+      padding: 20px 10px;
+      background-color: transparent;
+    }
+
+    .hero-box {
+      position: relative;
+      width: 100%;
+      max-width: 1120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      animation: heroSoftEnter 1.1s ease-out both;
+    }
+
+    @keyframes heroSoftEnter {
+      0% {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .code-click-me {
+      position: relative;
+      margin-top: 12px;
+      display: inline-block;
+      font-family: 'Patrick Hand', cursive;
+      font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: 0.6px;
+      padding: 6px 22px;
+      border-radius: 30px;
+      cursor: pointer;
+      animation: clickMePulse 2s ease-in-out infinite;
+      transition: background-color 0.25s ease, text-shadow 0.25s ease;
+    }
+
+    .code-click-me:hover {
+      background-color: rgba(255, 255, 255, 0.14);
+      text-shadow: 0 0 14px rgba(255, 245, 240, 0.9);
+    }
+
+    @keyframes clickMePulse {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.92;
+      }
+      50% {
+        transform: translateY(-5px) scale(1.07);
+        opacity: 1;
+        text-shadow: 0 0 12px rgba(255, 235, 230, 0.75);
+      }
+    }
+
+    /* =========================================
+       SECTION 2: RING BINDER NOTEBOOK ("24")
+       ========================================= */
+    .notebook {
+      width: 860px;
+      max-width: 96vw;
+      min-height: 470px;
+      background: #F7F5F0;
+      border-radius: 14px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      color: var(--ink);
+    }
+
+    .notebook::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: rgba(0, 0, 0, 0.12);
+      transform: translateX(-50%);
+    }
+
+    .rings {
+      position: absolute;
+      left: 50%;
+      top: 18%;
+      bottom: 18%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 5;
+    }
+
+    .ring {
+      width: 44px;
+      height: 14px;
+      border: 3px solid #222;
+      border-radius: 20px;
+      background: linear-gradient(90deg, #555, #111, #666);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .page-left, .page-right {
+      padding: 45px 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .big-twenty {
+      position: relative;
+      font-family: 'Playfair Display', serif;
+      font-size: 8.2rem;
+      font-weight: 800;
+      color: #7B2626;
+      line-height: 1;
+      margin-bottom: 18px;
+    }
+
+    .cupcake-sticker {
+      position: absolute;
+      right: -14px;
+      bottom: 6px;
+      font-size: 3rem;
+      filter: drop-shadow(0 3px 5px rgba(0,0,0,0.2));
+      animation: softBreathe 3.8s ease-in-out infinite;
+    }
+
+    .notebook-text {
+      font-family: 'Caveat', cursive;
+      font-size: 1.45rem;
+      line-height: 1.35;
+      color: #2B2424;
+      max-width: 340px;
+    }
+
+    .polaroid-frame {
+      position: relative;
+      background: #FFFFFF;
+      padding: 12px 12px 34px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+      transform: rotate(3deg);
+      width: 240px;
+      outline: 4px solid #8D2323;
+      outline-offset: -8px;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .polaroid-frame:hover {
+      transform: rotate(0deg) translateY(-4px);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.24);
+    }
+
+    .photo-box {
+      width: 100%;
+      height: 180px;
+      background: #E5D9CE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #5A4646;
+      font-size: 1rem;
+      overflow: hidden;
+    }
+
+    .photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .sticker-fav {
+      position: absolute;
+      top: -18px;
+      right: -18px;
+      background: #FFFDF9;
+      color: #8D2323;
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 1.35rem;
+      padding: 4px 12px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+      transform: rotate(12deg);
+    }
+
+    .sticker-heart {
+      position: absolute;
+      top: -12px;
+      left: -12px;
+      font-size: 1.6rem;
+      animation: softBreathe 3.2s ease-in-out infinite;
+    }
+
+    .sticker-stars {
+      position: absolute;
+      bottom: -14px;
+      right: -14px;
+      font-size: 1.5rem;
+      animation: softBreathe 4s ease-in-out infinite;
+    }
+
+    .i-love-you {
+      font-family: 'Caveat', cursive;
+      font-size: 1.45rem;
+      color: #2B2424;
+      margin-top: 22px;
+    }
+
+    /* =========================================
+       SECTION 3: TWO LETTERS + TWO PHOTOS
+       ========================================= */
+    .story-container {
+      width: 920px;
+      max-width: 95vw;
+      display: flex;
+      flex-direction: column;
+      gap: 55px;
+    }
+
+    .story-row {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .story-row.reverse {
+      grid-template-columns: 1.25fr 1fr;
+    }
+
+    .envelope-photo-card {
+      background: #F5E9D8;
+      padding: 18px 14px 14px;
+      border-radius: 6px;
+      box-shadow: 0 12px 26px rgba(0,0,0,0.32);
+      position: relative;
+      width: 250px;
+      margin: 0 auto;
+      transition: transform 0.35s ease;
+    }
+
+    .envelope-photo-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .envelope-photo-card .doodle-heart {
+      text-align: center;
+      color: #6D3B3B;
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+
+    .striped-photo {
+      background: #FFFDF9;
+      padding: 8px;
+      border: 5px solid #B5D2E8;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .handwritten-letter {
+      font-family: 'Caveat', cursive;
+      font-size: 1.48rem;
+      line-height: 1.38;
+      color: #F7F4EC;
+    }
+
+    .taped-polaroid {
+      background: #FFFFFF;
+      padding: 12px 12px 28px;
+      width: 270px;
+      margin: 0 auto;
+      position: relative;
+      box-shadow: 0 14px 28px rgba(0,0,0,0.35);
+      transition: transform 0.35s ease;
+    }
+
+    .taped-polaroid:hover {
+      transform: translateY(-4px);
+    }
+
+    .tape {
+      position: absolute;
+      width: 48px;
+      height: 18px;
+      background: rgba(246, 239, 200, 0.78);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+
+    .tape.tl { top: -8px; left: -14px; transform: rotate(-35deg); }
+    .tape.br { bottom: -8px; right: -14px; transform: rotate(-35deg); }
+    .star-pin { position: absolute; top: -14px; left: -12px; font-size: 1.5rem; }
+
+    /* =========================================
+       SECTION 4: 35MM FILM STRIP
+       ========================================= */
+    .film-wrapper {
+      position: relative;
+      width: 880px;
+      max-width: 96vw;
+      background: #0F0F0F;
+      padding: 26px 18px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.5);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      border-top: 10px dashed #EAEAEA;
+      border-bottom: 10px dashed #EAEAEA;
+    }
+
+    .film-bow {
+      position: absolute;
+      top: -26px;
+      left: -20px;
+      font-size: 2.5rem;
+      transform: rotate(-18deg);
+      z-index: 4;
+      animation: softBreathe 3.8s ease-in-out infinite;
+    }
+
+    .film-star {
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2.4rem;
+      z-index: 4;
+    }
+
+    .film-frame {
+      background: #222;
+      height: 165px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #DDD;
+      font-size: 0.9rem;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .film-frame:hover {
+      transform: scale(1.03);
+    }
+
+    .film-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @keyframes softBreathe {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.07);
+      }
+    }
+
+    /* =========================================
+       SECTION 5: STAMP LETTER + CLICK ME KISSES + PHOTO
+       ========================================= */
+    .final-board {
+      position: relative;
+      width: 860px;
+      max-width: 96vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .stamp-paper {
+      position: relative;
+      background: #F4EFE4;
+      color: #2B2020;
+      width: 470px;
+      max-width: 100%;
+      padding: 36px 34px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.38);
+      border: 8px dotted #F4EFE4;
+    }
+
+    .stamp-paper p {
+      font-family: 'Caveat', cursive;
+      font-size: 1.36rem;
+      line-height: 1.34;
+    }
+
+    .stamp-bow {
+      position: absolute;
+      top: 12px;
+      left: 14px;
+      font-size: 1.4rem;
+    }
+
+    .bears-sticker {
+      position: absolute;
+      bottom: -24px;
+      left: -20px;
+      font-size: 3.1rem;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.3));
+      animation: softBreathe 3.5s ease-in-out infinite;
+    }
+
+    .kiss-click-btn {
+      background: #1E1D1B;
+      color: #FFFFFF;
+      border: 3px solid #E8DEC8;
+      border-radius: 30px;
+      padding: 10px 22px;
+      cursor: pointer;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1.15rem;
+      transition: transform 0.2s ease;
+    }
+
+    .kiss-click-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .music-notes {
+      font-size: 1.5rem;
+      color: #F6EFEA;
+      animation: softNotesFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes softNotesFloat {
+      0%, 100% {
+        transform: translateY(0px);
+        opacity: 0.85;
+      }
+      50% {
+        transform: translateY(-4px);
+        opacity: 1;
+      }
+    }
+
+    .kiss-graphic {
+      position: fixed;
+      bottom: -55px;
+      width: clamp(44px, 6vw, 68px);
+      height: clamp(32px, 4.5vw, 50px);
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0;
+      animation: softKissRise 2.5s ease-in-out forwards;
+      filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.22));
+    }
+
+    @keyframes softKissRise {
+      0% {
+        transform: translateY(0) translateX(0px) scale(0.82) rotate(-6deg);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.9;
+      }
+      55% {
+        transform: translateY(-50vh) translateX(10px) scale(1) rotate(5deg);
+        opacity: 0.9;
+      }
+      85% {
+        opacity: 0.65;
+      }
+      100% {
+        transform: translateY(-95vh) translateX(-8px) scale(1.08) rotate(-4deg);
+        opacity: 0;
+      }
+    }
+
+    .music-toggle-btn {
+      position: fixed;
+      bottom: 18px;
+      right: 18px;
+      z-index: 9500;
+      background: rgba(247, 244, 236, 0.92);
+      color: #732626;
+      border: 2px solid #732626;
+      border-radius: 50px;
+      padding: 8px 16px;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1.05rem;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .music-toggle-btn:hover {
+      transform: scale(1.05);
+      background: #FFFFFF;
+    }
+
+    @media (max-width: 768px) {
+      .hero-section {
+        min-height: 75vh;
+      }
+      .notebook {
+        grid-template-columns: 1fr;
+      }
+      .notebook::before, .rings {
+        display: none;
+      }
+      .story-row, .story-row.reverse {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .film-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .bg-bow {
+        opacity: 0.16;
+      }
+    }
+  </style>
+</head>
 <body>
 
-<!-- FIRST PAGE -->
+  <!-- AESTHETIC FLOATING BOWS -->
+  <div class="bg-bows" aria-hidden="true">
+    <span class="bg-bow b1">🎀</span>
+    <span class="bg-bow b2">🎀</span>
+    <span class="bg-bow b3">🎀</span>
+    <span class="bg-bow b4">🎀</span>
+    <span class="bg-bow b5">🎀</span>
+    <span class="bg-bow b6">🎀</span>
+  </div>
 
-<div class="page" id="page1">
-
-    <div class="envelope" onclick="openPage()">
-
-        <div class="envelope-text">
-            Happy<br>Birthday ❤️
-        </div>
-
+  <!-- SECTION 1: HERO IMAGE + CODE ANIMATED CLICK ME! -->
+  <section class="section hero-section" id="home">
+    <div class="hero-box">
+      <img src="hero.jpg" alt="Happy Birthday" class="hero-img" />
+      <a href="#notebook" class="code-click-me">click me!</a>
     </div>
+  </section>
 
-    <p class="click-text">click me! ♡</p>
+  <!-- SECTION 2: NOTEBOOK ("24" + POLAROID) -->
+  <section class="section" id="notebook">
+    <div class="notebook soft-reveal">
+      <div class="rings">
+        <span class="ring"></span>
+        <span class="ring"></span>
+        <span class="ring"></span>
+      </div>
 
-</div>
+      <div class="page-left">
+        <div class="big-twenty">
+          24
+          <span class="cupcake-sticker">🧁</span>
+        </div>
+        <p class="notebook-text">
+          Happy Birthday baby!<br>
+          Still my favorite human, making me laugh at the dumbest things, making me cry every time too, yet always my favorite place to be. 🎀♡
+        </p>
+      </div>
 
+      <div class="page-right">
+        <div class="polaroid-frame">
+          <span class="sticker-heart">🩷</span>
+          <span class="sticker-fav">Favorite person</span>
+          <div class="photo-box">
+            <img src="photo1.jpeg" alt="Favorite person" />
+          </div>
+          <span class="sticker-stars">✦✦</span>
+        </div>
+        <div class="i-love-you">I love you!</div>
+      </div>
+    </div>
+  </section>
 
-<!-- SECOND PAGE -->
+  <!-- SECTION 3: TWO LETTERS + TWO PHOTOS -->
+  <section class="section" id="letters">
+    <div class="story-container">
+      <div class="story-row soft-reveal">
+        <div class="envelope-photo-card">
+          <div class="doodle-heart">♡</div>
+          <div class="striped-photo">
+            <div class="photo-box" style="height: 165px;">
+              <img src="photo2.jpeg" alt="Memory 1" />
+            </div>
+          </div>
+        </div>
+        <p class="handwritten-letter">
+         No matter how long we've been together or everything that has happened between us up to today, I still love you just the same, Kikii. I want to stay right by your side forever, always being there and supporting you in every single thing.
+        </p>
+      </div>
 
-<div class="page" id="page2">
+      <div class="story-row reverse soft-reveal">
+        <p class="handwritten-letter">
+          Happy Birthday My Love ❤️
+        </p>
+        <div class="taped-polaroid">
+          <span class="tape tl"></span>
+          <span class="star-pin">⭐</span>
+          <div class="photo-box" style="height: 175px;">
+            <img src="photo3.jpeg" alt="Memory 2" />
+          </div>
+          <span class="tape br"></span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <h1 class="birthday-title">
-        Happy Birthday
-    </h1>
+  <!-- SECTION 4: FILM STRIP -->
+  <section class="section" id="film">
+    <div class="film-wrapper soft-reveal">
+      <span class="film-bow">🎀</span>
+      <div class="film-frame"><img src="film1.jpeg" alt="Film 1" /></div>
+      <div class="film-frame"><img src="film2.jpeg" alt="Film 2" /></div>
+      <div class="film-frame"><img src="film3.jpeg" alt="Film 3" /></div>
+      <div class="film-frame"><img src="film4.jpeg" alt="Film 4" /></div>
+      <div class="film-frame"><img src="film5.jpeg" alt="Film 5" /></div>
+      <span class="film-star">⭐</span>
+    </div>
+  </section>
 
-    <h1 class="birthday-title">
-        My Love ❤️
-    </h1>
+  <!-- SECTION 5: STAMP LETTER + CLICK ME KISSES + POLAROID -->
+  <section class="section" id="ending">
+    <div class="final-board soft-reveal">
+      <div class="stamp-paper">
+        <span class="stamp-bow">🎀</span>
+        <p>
+          "After everything, somehow my heart still finds its way back to you." ❤️
+        </p>
+        <span class="bears-sticker">🧸🧸</span>
+      </div>
 
-    <h1 class="birthday-title">
-        KIKII 🥹
-    </h1>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+        <button type="button" class="kiss-click-btn" onclick="spawnKissBurst()">
+          click me!
+        </button>
+        <div class="music-notes">♪ ♫</div>
+      </div>
 
-    <p class="birthday-title">
-        Made with lots of love, just for you!
-    </p>
+      <div class="taped-polaroid" style="width: 235px; transform: rotate(4deg);">
+        <span style="position:absolute; top:-14px; right:-12px; font-size:1.6rem;">🩷</span>
+        <div class="photo-box" style="height: 215px;">
+          <img src="photo4.jpeg" alt="Final Memory" />
+        </div>
+      </div>
+    </div>
+  </section>
 
-</div>
+  <script>
+    function spawnKissBurst() {
+      const kissSvg = `
+        <svg viewBox="0 0 120 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 42 C26 24, 46 22, 60 32 C74 22, 94 24, 108 42 C92 40, 74 38, 60 43 C46 38, 28 40, 12 42 Z" fill="#C92A3E"/>
+          <path d="M14 43 C32 45, 46 45, 60 44 C74 45, 88 45, 106 43 C90 62, 74 68, 60 67 C46 68, 30 62, 14 43 Z" fill="#A61C2E"/>
+          <path d="M16 43 Q38 41 60 43 Q82 41 104 43" stroke="#5E0D18" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M26 31 C36 27, 46 28, 53 32" stroke="#FF8FA3" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.8"/>
+        </svg>
+      `;
 
+      for (let i = 0; i < 16; i++) {
+        setTimeout(() => {
+          const kiss = document.createElement('div');
+          kiss.className = 'kiss-graphic';
+          kiss.innerHTML = kissSvg;
+          kiss.style.left = Math.random() * 86 + 7 + '%';
+          document.body.appendChild(kiss);
 
-<script>
+          setTimeout(() => {
+            kiss.remove();
+          }, 2550);
+        }, i * 110);
+      }
+    }
 
-function openPage() {
+    const softObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
 
-    const first = document.getElementById("page1");
-    const second = document.getElementById("page2");
+    document.querySelectorAll('.soft-reveal').forEach((el) => {
+      softObserver.observe(el);
+    });
+  </script>
 
-    first.style.opacity = "0";
+  <audio id="bgMusic" loop preload="auto">
+    <source src="song.mpeg" type="audio/mpeg" />
+    <source src="song.mp3" type="audio/mpeg" />
+    <source src="WhatsApp Audio 2026-11-20 at 5.38.07 PM.mpeg" type="audio/mpeg" />
+  </audio>
+  <button type="button" class="music-toggle-btn" id="musicBtn" onclick="toggleBgMusic()">
+    ♪ Music Off
+  </button>
 
-    setTimeout(() => {
+  <script>
+    const bgMusic = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+    let musicStartedOnce = false;
 
-        first.style.display = "none";
+    function updateMusicButton() {
+      if (bgMusic.paused) {
+        musicBtn.textContent = '♪ Music Off';
+      } else {
+        musicBtn.textContent = '♫ Music On';
+      }
+    }
 
-        second.classList.add("show");
+    function toggleBgMusic() {
+      if (bgMusic.paused) {
+        bgMusic.volume = 0.35;
+        bgMusic.play().then(() => {
+          musicStartedOnce = true;
+          updateMusicButton();
+        }).catch(() => {});
+      } else {
+        bgMusic.pause();
+        updateMusicButton();
+      }
+    }
 
-    }, 1000);
-
-}
-
-</script>
+    document.addEventListener('click', function () {
+      if (!musicStartedOnce && bgMusic.paused) {
+        bgMusic.volume = 0.35;
+        bgMusic.play().then(() => {
+          musicStartedOnce = true;
+          updateMusicButton();
+        }).catch(() => {});
+      }
+    }, { once: true });
+  </script>
 
 </body>
 </html>
